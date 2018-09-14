@@ -12,8 +12,9 @@ class PhotosViewController: UIViewController, UITableViewDataSource, UITableView
 
     @IBOutlet weak var tableView: UITableView!
     var posts: [[String: Any]] = []
+    var refreshControl: UIRefreshControl!
     
-    let cellId = "PhotoCell"
+    //let cellId = "PhotoCell"
     
     
     override func viewDidLoad() {
@@ -21,6 +22,8 @@ class PhotosViewController: UIViewController, UITableViewDataSource, UITableView
         
         tableView.delegate = self
         tableView.dataSource = self
+        
+        
         
         //tableView.registerClass(PhotoCell.swift, forCellReuseIdentifier: "PhotoCell")
         
@@ -49,11 +52,41 @@ class PhotosViewController: UIViewController, UITableViewDataSource, UITableView
         task.resume()
 
         // Do any additional setup after loading the view.
+        refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(PhotosViewController.didPullToRefresh(_:)), for: .valueChanged)
+        refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh!")
+        tableView.insertSubview(refreshControl, at: 0)
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    @objc func didPullToRefresh(_ refreshControl: UIRefreshControl) {
+        refresh()
+    }
+    
+    func refresh() {
+        let url = URL(string: "https://api.tumblr.com/v2/blog/humansofnewyork.tumblr.com/posts/photo?api_key=Q6vHoaVm5L1u2ZAW1fqv3Jw48gFzYVg9P0vH0VHl3GVy6quoGV")!
+        let session = URLSession(configuration: .default,    delegate: nil, delegateQueue: OperationQueue.main)
+        session.configuration.requestCachePolicy = .reloadIgnoringLocalCacheData
+        let task = session.dataTask(with: url) { (data, response, error) in
+            if let error = error {
+                print(error.localizedDescription)
+            } else if let data = data,
+                let dataDictionary = try! JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] {
+                print(dataDictionary)
+                
+                // TODO: Get the posts and store in posts property
+                let responseDictionary = dataDictionary["response"] as! [String: Any]
+                self.posts = responseDictionary["posts"] as! [[String: Any]]
+                // TODO: Reload the table view
+                self.tableView.reloadData()
+            }
+        }
+        task.resume()
+        self.refreshControl.endRefreshing()
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -80,9 +113,17 @@ class PhotosViewController: UIViewController, UITableViewDataSource, UITableView
         return cell
     }
     
+    
+    
+   
+    
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return CGFloat(200)
+        return CGFloat(250)
     }
+    
+    
+   
     
 
     /*
