@@ -11,6 +11,7 @@
 		64138834214B549A009CFA0E /* PhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64138833214B549A009CFA0E /* PhotosViewController.swift */; };
 		64138836214B6964009CFA0E /* PhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64138835214B6964009CFA0E /* PhotoCell.swift */; };
 		6456194B2157419D0056E5EE /* PhotoDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6456194A2157419D0056E5EE /* PhotoDetailsViewController.swift */; };
+		6456194D2157E6110056E5EE /* InfiniteScrollActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6456194C2157E6110056E5EE /* InfiniteScrollActivityView.swift */; };
 		647FE7F1214876CF0048AE17 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 647FE7F0214876CF0048AE17 /* AppDelegate.swift */; };
 		647FE7F6214876CF0048AE17 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 647FE7F4214876CF0048AE17 /* Main.storyboard */; };
 		647FE7F8214876D00048AE17 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 647FE7F7214876D00048AE17 /* Assets.xcassets */; };
@@ -46,6 +47,7 @@
 		64138833214B549A009CFA0E /* PhotosViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PhotosViewController.swift; path = Tumblr/PhotosViewController.swift; sourceTree = SOURCE_ROOT; };
 		64138835214B6964009CFA0E /* PhotoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PhotoCell.swift; path = /Users/macbookretina/Documents/GitHub/Tumblr/Tumblr/PhotoCell.swift; sourceTree = "<absolute>"; };
 		6456194A2157419D0056E5EE /* PhotoDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoDetailsViewController.swift; sourceTree = "<group>"; };
+		6456194C2157E6110056E5EE /* InfiniteScrollActivityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfiniteScrollActivityView.swift; sourceTree = "<group>"; };
 		647FE7ED214876CF0048AE17 /* Tumblr.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tumblr.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		647FE7F0214876CF0048AE17 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		647FE7F5214876CF0048AE17 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -138,6 +140,7 @@
 				64159D48214B0DD400A47B28 /* ViewController */,
 				647FE7F0214876CF0048AE17 /* AppDelegate.swift */,
 				64138833214B549A009CFA0E /* PhotosViewController.swift */,
+				6456194C2157E6110056E5EE /* InfiniteScrollActivityView.swift */,
 				64138835214B6964009CFA0E /* PhotoCell.swift */,
 				6456194A2157419D0056E5EE /* PhotoDetailsViewController.swift */,
 				647FE7F4214876CF0048AE17 /* Main.storyboard */,
@@ -391,6 +394,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6456194D2157E6110056E5EE /* InfiniteScrollActivityView.swift in Sources */,
 				6456194B2157419D0056E5EE /* PhotoDetailsViewController.swift in Sources */,
 				647FE7F1214876CF0048AE17 /* AppDelegate.swift in Sources */,
 				64138836214B6964009CFA0E /* PhotoCell.swift in Sources */,

@@ -8,11 +8,15 @@
 import UIKit
 import AlamofireImage
 
-class PhotosViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class PhotosViewController: UIViewController, UITableViewDataSource, UITableViewDelegate{
 
+    @IBOutlet weak var UIActivityIndicatorView: UIActivityIndicatorView!
     @IBOutlet weak var tableView: UITableView!
     var posts: [[String: Any]] = []
     var refreshControl: UIRefreshControl!
+    
+    var isMoreDataLoading = false
+    var loadingMoreView:InfiniteScrollActivityView?
    
     
     //let cellId = "PhotoCell"
@@ -126,7 +130,7 @@ class PhotosViewController: UIViewController, UITableViewDataSource, UITableView
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         
-        return 30
+        return 35
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -134,7 +138,7 @@ class PhotosViewController: UIViewController, UITableViewDataSource, UITableView
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1    //no. of rows in the section
+        return 1
     }
     
     
@@ -162,23 +166,21 @@ class PhotosViewController: UIViewController, UITableViewDataSource, UITableView
         let post = posts[section]
         let stringDate = post["date"] as? String
         
-        let dateFormatter = DateFormatter()//dateFormat has to look same as string data coming in
-        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss zzz"//data extracted looks like this -> 2018-09-03 22:49:17 GMT
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss zzz"
         dateFormatter.locale = Locale(identifier: "en_US_POSIX")
-        dateFormatter.timeZone = TimeZone(abbreviation: "GMT+0:00") //Current time zone
+        dateFormatter.timeZone = TimeZone(abbreviation: "GMT+0:00")
         dateFormatter.isLenient = true
-        //print(type(of: stringDate))
+        
         
         let date = dateFormatter.date(from: stringDate!)
         //print(date!)
         
-        //this will make date coming like this 2018-09-03 22:49:17 GMT turn like this //MMM d, yyyy, HH:mm a
+       
         dateFormatter.dateStyle = .medium
         dateFormatter.timeStyle = .short
         
-        // Add a UILabel for the date here
-        // Use the section number to get the right URL
-        // let label = ...
+        
         let labelDate = UILabel(frame: CGRect(x: 55, y: 10, width: 250, height: 30))
         labelDate.textAlignment = .left
         labelDate.text = dateFormatter.string(from: date ?? Date())
@@ -186,6 +188,27 @@ class PhotosViewController: UIViewController, UITableViewDataSource, UITableView
         headerView.addSubview(labelDate)
         
         return headerView
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if (!isMoreDataLoading) {
+            // Calculate the position of one screen length before the bottom of the results
+            let scrollViewContentHeight = tableView.contentSize.height
+            let scrollOffsetThreshold = scrollViewContentHeight - tableView.bounds.size.height
+            
+            // When the user has scrolled past the threshold, start requesting
+            if(scrollView.contentOffset.y > scrollOffsetThreshold && tableView.isDragging) {
+                isMoreDataLoading = true
+                
+                // Update position of loadingMoreView, and start loading indicator
+                let frame = CGRect(x: 0, y: tableView.contentSize.height, width: tableView.bounds.size.width, height: InfiniteScrollActivityView.defaultHeight)
+                loadingMoreView?.frame = frame
+                loadingMoreView!.startAnimating()
+                
+                // Code to load more results
+                refresh()
+            }
+        }
     }
     
     
