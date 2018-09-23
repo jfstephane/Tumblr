@@ -13,6 +13,7 @@ class PhotosViewController: UIViewController, UITableViewDataSource, UITableView
     @IBOutlet weak var tableView: UITableView!
     var posts: [[String: Any]] = []
     var refreshControl: UIRefreshControl!
+   
     
     //let cellId = "PhotoCell"
     
@@ -89,9 +90,6 @@ class PhotosViewController: UIViewController, UITableViewDataSource, UITableView
         self.refreshControl.endRefreshing()
     }
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return posts.count
-    }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let post = posts[indexPath.row]
@@ -119,8 +117,53 @@ class PhotosViewController: UIViewController, UITableViewDataSource, UITableView
     
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        
         return CGFloat(250)
     }
+    
+   
+    
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        
+        return 30
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return self.posts.count
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1    //no. of rows in the section
+    }
+    
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let headerView = UIView(frame: CGRect(x: 0, y: 0, width: 200, height: 25))
+        headerView.backgroundColor = UIColor(white: 1, alpha: 0.9)
+        
+        let profileView = UIImageView(frame: CGRect(x: 10, y: 0, width: 30, height: 30))
+        profileView.clipsToBounds = true
+        profileView.layer.cornerRadius = 15;
+        profileView.layer.borderColor = UIColor(white: 0.7, alpha: 0.8).cgColor
+        profileView.layer.borderWidth = 1;
+        
+        // Set the avatar
+        profileView.af_setImage(withURL: URL(string: "https://api.tumblr.com/v2/blog/humansofnewyork.tumblr.com/avatar")!)
+        headerView.addSubview(profileView)
+        
+        let dateLabel = UILabel(frame: CGRect(x: 50, y: 5, width: 250, height: 15))
+        let post = posts[section]
+        if let date = post["date"] as? String {
+            dateLabel.text = date
+        }
+        
+        headerView.addSubview(dateLabel)
+        
+        return headerView
+    }
+    
+    
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let vc = segue.destination as! PhotoDetailsViewController
