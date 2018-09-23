@@ -152,13 +152,38 @@ class PhotosViewController: UIViewController, UITableViewDataSource, UITableView
         profileView.af_setImage(withURL: URL(string: "https://api.tumblr.com/v2/blog/humansofnewyork.tumblr.com/avatar")!)
         headerView.addSubview(profileView)
         
-        let dateLabel = UILabel(frame: CGRect(x: 50, y: 5, width: 250, height: 15))
+        
+        /*let dateLabel = UILabel(frame: CGRect(x: 50, y: 5, width: 250, height: 15))
         let post = posts[section]
         if let date = post["date"] as? String {
             dateLabel.text = date
-        }
+        }*/
         
-        headerView.addSubview(dateLabel)
+        let post = posts[section]
+        let stringDate = post["date"] as? String
+        
+        let dateFormatter = DateFormatter()//dateFormat has to look same as string data coming in
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss zzz"//data extracted looks like this -> 2018-09-03 22:49:17 GMT
+        dateFormatter.locale = Locale(identifier: "en_US_POSIX")
+        dateFormatter.timeZone = TimeZone(abbreviation: "GMT+0:00") //Current time zone
+        dateFormatter.isLenient = true
+        //print(type(of: stringDate))
+        
+        let date = dateFormatter.date(from: stringDate!)
+        //print(date!)
+        
+        //this will make date coming like this 2018-09-03 22:49:17 GMT turn like this //MMM d, yyyy, HH:mm a
+        dateFormatter.dateStyle = .medium
+        dateFormatter.timeStyle = .short
+        
+        // Add a UILabel for the date here
+        // Use the section number to get the right URL
+        // let label = ...
+        let labelDate = UILabel(frame: CGRect(x: 55, y: 10, width: 250, height: 30))
+        labelDate.textAlignment = .left
+        labelDate.text = dateFormatter.string(from: date ?? Date())
+        
+        headerView.addSubview(labelDate)
         
         return headerView
     }
