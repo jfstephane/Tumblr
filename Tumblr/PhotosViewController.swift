@@ -17,6 +17,7 @@ class PhotosViewController: UIViewController, UITableViewDataSource, UITableView
     
     var isMoreDataLoading = false
     var loadingMoreView:InfiniteScrollActivityView?
+     var limit: Int = 10
    
     
     //let cellId = "PhotoCell"
@@ -27,6 +28,11 @@ class PhotosViewController: UIViewController, UITableViewDataSource, UITableView
         
         tableView.delegate = self
         tableView.dataSource = self
+        
+        
+        loadingMoreView = InfiniteScrollActivityView()
+        loadingMoreView!.isHidden = true
+        tableView.addSubview(loadingMoreView!)
         
         
         
@@ -202,6 +208,9 @@ class PhotosViewController: UIViewController, UITableViewDataSource, UITableView
                 
                 // Update position of loadingMoreView, and start loading indicator
                 let frame = CGRect(x: 0, y: tableView.contentSize.height, width: tableView.bounds.size.width, height: InfiniteScrollActivityView.defaultHeight)
+                
+                isMoreDataLoading = true
+                
                 loadingMoreView?.frame = frame
                 loadingMoreView!.startAnimating()
                 

@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "49320C1527E1FD0B329AB6AFD87FCAC9"
-               BlueprintName = "Pods-Tumblr"
+               BlueprintIdentifier = "22050745E3DA311051A239BA7EB8CD03"
+               BlueprintName = "SVPullToRefresh"
                ReferencedContainer = "container:Pods.xcodeproj"
-               BuildableName = "Pods-Tumblr.framework">
+               BuildableName = "SVPullToRefresh.framework">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

@@ -2,20 +2,24 @@ PODS:
   - Alamofire (4.7.3)
   - AlamofireImage (3.3.1):
     - Alamofire (~> 4.5)
+  - SVPullToRefresh (0.4.1)
 
 DEPENDENCIES:
   - Alamofire (~> 4.4)
   - AlamofireImage
+  - SVPullToRefresh
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - Alamofire
     - AlamofireImage
+    - SVPullToRefresh
 
 SPEC CHECKSUMS:
   Alamofire: c7287b6e5d7da964a70935e5db17046b7fde6568
   AlamofireImage: 3b35b586853abaf94ca1250f4e94cff3c21a4c0d
+  SVPullToRefresh: ba2e718695a43253d8bea6852d2960097dc15d8c
 
-PODFILE CHECKSUM: c087505600633a2385b23d3002b240f613a2ec0b
+PODFILE CHECKSUM: e0f66eb32d3f9c41286d21df9fac95213f83b068
 
 COCOAPODS: 1.5.2
