@@ -72,6 +72,10 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dlQ-ed-H18">
                                 <rect key="frame" x="8" y="86" width="359" height="223"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="bm7-Fj-hEk" appends="YES" id="qsa-1P-yvj"/>
+                                </connections>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -82,8 +86,37 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eP7-Tv-ygp" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="bm7-Fj-hEk">
+                    <connections>
+                        <segue destination="4Jb-Vp-taq" kind="modal" id="tae-Oy-Phe"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1781.5999999999999" y="137.18140929535232"/>
+        </scene>
+        <!--Full Screen Photo View Controller-->
+        <scene sceneID="BQ6-f3-Awi">
+            <objects>
+                <viewController id="4Jb-Vp-taq" customClass="FullScreenPhotoViewController" customModule="Tumblr" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="ZmU-XL-u1g">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="v0d-lB-A1i">
+                                <rect key="frame" x="16" y="20" width="343" height="627"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="WCY-Wl-aZq"/>
+                    </view>
+                    <connections>
+                        <outlet property="fullScreen" destination="v0d-lB-A1i" id="2RU-kH-Wvq"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="FqN-EG-YLA" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2472.8000000000002" y="139.880059970015"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="zBv-w5-lzC">
