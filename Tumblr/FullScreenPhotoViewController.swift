@@ -9,13 +9,19 @@
 import UIKit
 import AlamofireImage
 
-class FullScreenPhotoViewController: UIViewController {
+class FullScreenPhotoViewController: UIViewController, UIScrollViewDelegate {
     
+    @IBOutlet weak var closeButton: UIButton!
     @IBOutlet weak var fullScreen: UIImageView!
+    @IBOutlet weak var scrollVIew: UIScrollView!
     var imageURL: URL!
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        scrollVIew.delegate = self
+        
+        scrollVIew.contentSize = fullScreen!.bounds.size
         
         
         fullScreen.af_setImage(withURL: imageURL!)
@@ -28,7 +34,11 @@ class FullScreenPhotoViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
+    func viewForZooming(in scrollView: UIScrollView) -> UIView? {
+        return fullScreen
+    }
+    
+   
     /*
     // MARK: - Navigation
 
