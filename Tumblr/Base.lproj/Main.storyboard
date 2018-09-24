@@ -88,7 +88,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eP7-Tv-ygp" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tapGestureRecognizer id="bm7-Fj-hEk">
                     <connections>
-                        <segue destination="4Jb-Vp-taq" kind="modal" id="tae-Oy-Phe"/>
+                        <segue destination="4Jb-Vp-taq" kind="modal" modalPresentationStyle="fullScreen" modalTransitionStyle="coverVertical" id="tae-Oy-Phe"/>
                     </connections>
                 </tapGestureRecognizer>
             </objects>
